@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"goauth/controllers"
 	"goauth/internal/db"
 	"log"
 	"net/http"
@@ -29,6 +30,8 @@ func main() {
 	http.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
 		fmt.Fprintf(res, "Hey, welcome to Auth Service 101")
 	})
+
+	http.HandleFunc("/auth/register", controllers.HandleRegister)
 
 	http.ListenAndServe(":8090", nil)
 }
