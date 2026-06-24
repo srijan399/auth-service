@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"goauth/internal/db"
 	"goauth/types/auth"
+	dbqueries "goauth/utils/dbQueries"
 	"goauth/utils/hashing"
 	"goauth/utils/validation"
 	"io"
-	"log"
 	"net/http"
 )
 
@@ -28,7 +28,7 @@ func HandleRegister(res http.ResponseWriter, req *http.Request) {
 	}
 
 	// Check if new user
-	exists := checkUser(user.Email)
+	exists, _, _, _ := dbqueries.CheckExistingUser(user.Email)
 	fmt.Println("Does user exist?", exists)
 
 	if exists {
@@ -55,24 +55,6 @@ func HandleRegister(res http.ResponseWriter, req *http.Request) {
 
 	res.WriteHeader(http.StatusCreated)
 	fmt.Fprintf(res, "New User's User ID: %v\nRole: %v\n", userId, role)
-}
-
-func checkUser(email string) bool {
-	var exists bool
-	const checkUserQuery = `
-		SELECT EXISTS(
-			SELECT 1
-			FROM users
-			WHERE email = $1
-		)
-	`
-
-	err := db.DB.QueryRow(context.Background(), checkUserQuery, email).Scan(&exists)
-	if err != nil {
-		log.Fatalf("Error checking user in db. %v\n", err)
-	}
-
-	return exists
 }
 
 func insertUser(user auth.User, res http.ResponseWriter) int64 {

@@ -1,7 +1,6 @@
 package hashing
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"strconv"
@@ -26,15 +25,10 @@ func GetPasswordHash(password string) []byte {
 }
 
 // func CompareHashAndPassword(hashedPassword, password []byte) error
-func CompareHash(hash string, pw string) bool {
-	hashFromDB := []byte(hash)
-	inputPassword := []byte(pw)
-	err := bcrypt.CompareHashAndPassword(hashFromDB, inputPassword)
-
+func CompareHash(hashFromDB string, rawPassword string) error {
+	err := bcrypt.CompareHashAndPassword([]byte(hashFromDB), []byte(rawPassword))
 	if err != nil {
-		fmt.Println("Error comparing hash and password. Possible mismatch.")
-		return false
+		return err
 	}
-
-	return true
+	return nil
 }

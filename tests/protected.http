@@ -1,0 +1,2 @@
+GET http://localhost:8090/protected/dashboard
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNyaUBwLmNvbSIsImV4cCI6MTc4MjM4NjI5MSwiaWF0IjoxNzgyMjk5ODkxLCJzdWIiOjI3fQ.WAS9t--Tgrf-CZ_3FbZaVyWRO2wg6_uOkmq2_K8e8AI
