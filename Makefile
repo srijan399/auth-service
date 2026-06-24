@@ -2,6 +2,10 @@ docker-up:
 	docker compose up -d
 
 docker-down:
+	docker compose down
+
+# delete volume
+docker-no-volume:
 	docker compose down -v
 
 # docker check volume 

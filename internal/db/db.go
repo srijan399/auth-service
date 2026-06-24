@@ -2,7 +2,6 @@ package db
 
 import (
 	"context"
-	"fmt"
 	"os"
 
 	"github.com/jackc/pgx/v5"
@@ -17,8 +16,6 @@ func Connect() (*pgx.Conn, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	fmt.Println("Set up DB Connection!")
 
 	return conn, nil
 }

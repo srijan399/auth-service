@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"os"
 )
 
 func ConnectMain() {
@@ -14,7 +15,9 @@ func ConnectMain() {
 
 	DB = conn
 
-	fmt.Println("Connected to Postgres!")
+	pgAdminGateway := os.Getenv("PGADMIN_GATEWAY")
+
+	fmt.Printf("Connected to Postgres. Go to pgAdmin at %v\n", pgAdminGateway)
 }
 
 func RunQuery(queryString string) error {

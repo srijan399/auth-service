@@ -1,0 +1,6 @@
+POST http://localhost:8090/auth/register
+
+{
+    "email":"email@email",
+    "passwordHash": "abcdefg"
+}
